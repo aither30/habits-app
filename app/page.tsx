@@ -241,6 +241,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!hydrated) return;
+
     localStorage.setItem(
       COMPLETIONS_KEY,
       JSON.stringify(completions),
@@ -249,6 +250,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!hydrated) return;
+
     localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   }, [notes, hydrated]);
 
@@ -743,10 +745,12 @@ export default function Home() {
       <div className="mx-auto flex w-full max-w-[1600px]">
         {/* =========================
             DESKTOP SIDEBAR
+            RESPONSIVE FIX:
+            lg:block
         ========================= */}
 
         <aside
-          className={`hidden w-[230px] shrink-0 border-r xl:block ${
+          className={`hidden w-[230px] shrink-0 border-r lg:block ${
             darkMode
               ? "border-slate-800"
               : "border-slate-200"
@@ -864,8 +868,6 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* PROGRESS */}
-
               <div
                 className={`mb-5 overflow-hidden rounded-3xl border p-5 sm:mb-6 sm:p-6 ${
                   darkMode
@@ -951,8 +953,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* QUICK STATS */}
-
               <div className="mb-7 grid grid-cols-3 gap-2 sm:gap-3">
                 <SmallStat
                   title="Completed"
@@ -964,13 +964,10 @@ export default function Home() {
 
                 <SmallStat
                   title="Remaining"
-                  value={
-                    Math.max(
-                      habits.length -
-                        todayCompletedCount,
-                      0,
-                    )
-                  }
+                  value={Math.max(
+                    habits.length - todayCompletedCount,
+                    0,
+                  )}
                   icon="○"
                   cardClass={cardClass}
                   mutedClass={mutedClass}
@@ -984,8 +981,6 @@ export default function Home() {
                   mutedClass={mutedClass}
                 />
               </div>
-
-              {/* HABIT HEADER */}
 
               <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
@@ -1015,8 +1010,6 @@ export default function Home() {
                 />
               </div>
 
-              {/* FILTER */}
-
               <div className="mb-5 flex max-w-full gap-2 overflow-x-auto pb-1">
                 {CATEGORIES.map((item) => (
                   <button
@@ -1034,8 +1027,6 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-
-              {/* HABITS */}
 
               <div className="space-y-3">
                 {filteredHabits.length === 0 ? (
@@ -1069,8 +1060,6 @@ export default function Home() {
                         }`}
                       >
                         <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
-                          {/* CHECK BUTTON */}
-
                           <button
                             onClick={() =>
                               toggleTodayHabit(
@@ -1097,8 +1086,6 @@ export default function Home() {
                           >
                             {done ? "✓" : habit.icon}
                           </button>
-
-                          {/* INFO */}
 
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-1.5">
@@ -1148,8 +1135,6 @@ export default function Home() {
                               </span>
                             </div>
                           </div>
-
-                          {/* ACTIONS */}
 
                           <div className="flex shrink-0 items-center gap-1">
                             <button
@@ -1343,8 +1328,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* HEATMAP */}
-
               <div
                 className={`mt-5 overflow-hidden rounded-2xl border p-4 sm:p-5 ${cardClass}`}
               >
@@ -1496,8 +1479,6 @@ export default function Home() {
                         />
                       </div>
                     </div>
-
-                    {/* READ ONLY */}
 
                     <div className="space-y-3">
                       {habits.map((habit) => {
@@ -1895,6 +1876,7 @@ export default function Home() {
 
       {/* =========================
           MOBILE NAV
+          Tetap aktif < lg
       ========================= */}
 
       <nav
